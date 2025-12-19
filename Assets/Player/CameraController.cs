@@ -5,7 +5,7 @@ public class CameraController : MonoBehaviour
     public Transform target;
     public float distance = 7f;
     public float height = 2.5f;
-    public float mouseSensitivity = 3f;
+    public float mouseSensitivity = 7f;
 
     public float minPitch = -20f;
     public float maxPitch = 60f;

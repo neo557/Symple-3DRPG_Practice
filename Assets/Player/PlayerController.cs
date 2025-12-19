@@ -5,13 +5,14 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
-    static float walkspeed = 7;
+    static float walkspeed = 12;
     public float gravity = -9.81f;
     public float fallVelocity = 0f;
     private CharacterController controller;
     private Vector3 direction;
     bool isKnockback;
     Vector3 knockbackVelocity;
+    Animator animator;
     public float knockbackPower = 1f;
     public float knockbackDamping = 1f;
     float knockbackTimer;
@@ -21,6 +22,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         controller = GetComponent<CharacterController>();
+        animator = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
@@ -30,6 +32,10 @@ public class PlayerController : MonoBehaviour
         float v = Input.GetAxis("Vertical");
 
         direction = new Vector3(h, 0, v);
+
+        bool isMoving = direction.magnitude > 0.1f;
+        if (animator != null)
+            animator.SetBool("isMoving", isMoving);
 
         if (Camera.main != null)
         {

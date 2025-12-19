@@ -10,6 +10,7 @@ public class PlayerAttack : MonoBehaviour
 
     private bool isAttackable = false;
     private float CoolDownTimer = 0f;
+    Animator animator;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -24,6 +25,7 @@ public class PlayerAttack : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && !isAttackable && CoolDownTimer <= 0f)
         {
             StartCoroutine(Attack());
+            animator.SetTrigger("Attack");
         }
     }
 
