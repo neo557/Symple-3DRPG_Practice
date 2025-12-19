@@ -15,6 +15,8 @@ public class TrackingAI : MonoBehaviour
     public float moveRadious = 5f;
     public float ChangeTargetTime = 3f;
 
+
+
     private EnemyState state;
     private Vector3 startPos;
     private Vector3 targetPos;
@@ -35,7 +37,8 @@ public class TrackingAI : MonoBehaviour
         if (dist < chaseDistance)
             state = EnemyState.Chase;
         else
-            state = EnemyState.Wander;
+            //state = EnemyState.Wander;
+            return;
 
         switch (state)
         {
@@ -77,6 +80,9 @@ public class TrackingAI : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation,
         Quaternion.LookRotation(dir),
         Time.deltaTime * 5f);
+
+        //Debug.Log("TrackingAI Move called");
+
     }
 
     void SetRandomTarget()

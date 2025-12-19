@@ -2,7 +2,7 @@ using System.Collections;
 using System.Timers;
 using UnityEngine;
 
-[RequireComponent(typeof(CharacterController))]
+
 public class EnemyStatus : MonoBehaviour
 {
     private int maxHp = 5;

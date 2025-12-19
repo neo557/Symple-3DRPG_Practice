@@ -10,9 +10,10 @@ public class PlayerController : MonoBehaviour
     public float fallVelocity = 0f;
     private CharacterController controller;
     private Vector3 direction;
+    bool isKnockback;
     Vector3 knockbackVelocity;
-    public float knockbackPower = 12f;
-    public float knockbackDamping = 8f;
+    public float knockbackPower = 1f;
+    public float knockbackDamping = 1f;
     float knockbackTimer;
     public float knockbackDuration = 0.08f;
 
@@ -70,24 +71,24 @@ public class PlayerController : MonoBehaviour
         }
 
         //ノックバック処理
-        if (knockbackVelocity.magnitude > 0.1f)
+        if (isKnockback && knockbackTimer > 0f)
         {
             controller.Move(knockbackVelocity * Time.deltaTime);
-            if (knockbackTimer > 0)
+            knockbackTimer -= Time.deltaTime;
+            if (knockbackTimer <= 0f)
             {
-                knockbackTimer -= Time.deltaTime;
+                isKnockback = false;
             }
-            else
-            {
-                knockbackVelocity = Vector3.Lerp(knockbackVelocity, Vector3.zero, knockbackDamping * Time.deltaTime);
-            }
+            return;
         }
     }
     public void ApplyKnockBack(Vector3 fromPosition)
     {
-        Vector3 dir = (transform.position - fromPosition);
+        Vector3 dir = transform.position - fromPosition;
         dir.y = 0f;
         knockbackVelocity = dir.normalized * knockbackPower;
         knockbackTimer = knockbackDuration;
+        isKnockback = true;
+        Debug.Log($"KnockBack! dir:{dir} power:{knockbackPower}");
     }
 }

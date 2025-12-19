@@ -9,16 +9,24 @@ public class RandomMove : MonoBehaviour
     private Vector3 startPos;
     private Vector3 targetPos;
     private float timer;
+
+    EnemyAttack attack;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         startPos = transform.position;
+        attack = GetComponent<EnemyAttack>();
         SetRandomTarget();
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        if (attack != null && attack.IsBusy)
+        {
+            return;
+        }
         timer += Time.deltaTime;
         Move();
 
