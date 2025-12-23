@@ -19,6 +19,9 @@
 - Playerにanimationを実装しました。
 - Playerのモデルを（Mixamoでインストールして）実装しました。
 - アニメーションをCharacter Animationで作成しました。
+- Animator は Player 本体ではなく Model に配置
+- 攻撃は「アニメーション再生」と「当たり判定」を分離
+- 攻撃判定は Coroutine / Animation Event で制御
 
 ## 進捗と問題(20225/12/19)
 - ノックバックがきちんと反応しない問題を解消しました。
